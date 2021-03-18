@@ -8,8 +8,14 @@ const AppRoutes = () => {
 
   return (
     <Switch>
-      {isAuth && privateRoutes.map(({path, Component}) => <Route path={path} component={Component} exact/>)}
-      {publicRoutes.map(({path, Component}) => <Route path={path} component={Component} exact/>)}
+      {
+        isAuth && privateRoutes.map(({path, Component}) =>
+          <Route path={path} component={Component} exact key={path}/>)
+      }
+      {
+        publicRoutes.map(({path, Component}) =>
+          <Route path={path} component={Component} exact key={path}/>)
+      }
       <Redirect to={MAIN_ROUTE}/>
     </Switch>
   )

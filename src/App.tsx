@@ -1,9 +1,14 @@
 import React from "react"
 import AppRoutes from "./components/appRoutes"
+import Header from "./components/header"
 
 const App = () => {
+  const isAuth = true
   return (
-    <AppRoutes/>
+    <>
+      <Header isAuth={isAuth}/>
+      <AppRoutes/>
+    </>
   )
 }
 
