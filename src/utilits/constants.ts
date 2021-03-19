@@ -7,3 +7,4 @@ export const PRODUCT_ROUTE = "/product"
 export const PROFILE_ROUTE = "/profile"
 
 export const TOGGLE_CATALOG = "catalog/TOGGLE_CATALOG"
+export const SET_USER = "profile/SET_USER"

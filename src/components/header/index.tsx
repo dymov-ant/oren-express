@@ -14,19 +14,19 @@ import {
 import SearchIcon from "@material-ui/icons/Search"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 import AccountIcon from "@material-ui/icons/AccountCircle"
-import { useStyles } from "./styles"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toggleCatalog } from "../../redux/actions/catalog"
+import { StateType } from "../../redux/store"
+import { setUser } from "../../redux/actions/profile"
+import { useStyles } from "./styles"
 
-interface IHeaderProps {
-  isAuth: boolean
-}
 
-const Header: FC<IHeaderProps> = ({isAuth}) => {
+const Header: FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
+  const isAuth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
   const notificationsCount = 2 // временное решение для отображения badge
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -37,6 +37,13 @@ const Header: FC<IHeaderProps> = ({isAuth}) => {
   }
   const openCatalog = () => {
     dispatch(toggleCatalog(true))
+  }
+  const login = () => {
+    dispatch(setUser({id: 1, name: "test"}))
+  }
+  const logout = () => {
+    setAnchorEl(null)
+    dispatch(setUser(null))
   }
 
   const ProfileMenu = (
@@ -51,7 +58,7 @@ const Header: FC<IHeaderProps> = ({isAuth}) => {
         <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>Профиль</Badge>
       </MenuItem>
       <Divider light/>
-      <MenuItem onClick={handleMenuClose} color="secondary">
+      <MenuItem onClick={logout} color="secondary">
         <Typography color="secondary">Выход</Typography>
       </MenuItem>
     </Menu>
@@ -95,20 +102,8 @@ const Header: FC<IHeaderProps> = ({isAuth}) => {
                   </Badge>
                 </IconButton>
               </div>
-              : <Button variant="contained" color="secondary">Войти</Button>
+              : <Button variant="contained" color="secondary" onClick={login}>Войти</Button>
           }
-          {/*<div className={classes.sectionButtons}>*/}
-          {/*  <IconButton color="inherit">*/}
-          {/*    <Badge badgeContent={notificationsCount} color="secondary">*/}
-          {/*      <CartIcon/>*/}
-          {/*    </Badge>*/}
-          {/*  </IconButton>*/}
-          {/*  <IconButton color="inherit" onClick={handleMenuOpen}>*/}
-          {/*    <Badge variant="dot" color="secondary" badgeContent={notificationsCount}>*/}
-          {/*      <AccountIcon/>*/}
-          {/*    </Badge>*/}
-          {/*  </IconButton>*/}
-          {/*</div>*/}
         </Toolbar>
       </AppBar>
       {ProfileMenu}
