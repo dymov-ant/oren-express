@@ -1,19 +1,23 @@
-import React, { useState, KeyboardEvent, MouseEvent } from "react"
+import React, { KeyboardEvent, MouseEvent } from "react"
 import { useStyles } from "./styles"
-import { Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
+import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
+import { useDispatch, useSelector } from "react-redux"
+import { StateType } from "../../redux/store"
+import { toggleCatalog } from "../../redux/actions/catalog"
 
 
 const Catalog = () => {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
+  const open = useSelector((state: StateType) => state.catalogReducer.open)
 
   const toggleDrawer = (isOpen: boolean) => (event: KeyboardEvent | MouseEvent) => {
     if (event.type === "keydown" && ((event as KeyboardEvent).key === "Tab" || (event as KeyboardEvent).key === "Shift")) {
       return
     }
-    setOpen(isOpen)
+    dispatch(toggleCatalog(isOpen))
   }
 
   const Sidebar = (
@@ -33,10 +37,10 @@ const Catalog = () => {
       </List>
       <Divider/>
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
+            <ListItemText primary={text}/>
           </ListItem>
         ))}
       </List>
@@ -45,7 +49,6 @@ const Catalog = () => {
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" color="primary" onClick={toggleDrawer(true)}>Каталог</Button>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {Sidebar}
       </Drawer>

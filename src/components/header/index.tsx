@@ -15,6 +15,8 @@ import SearchIcon from "@material-ui/icons/Search"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 import AccountIcon from "@material-ui/icons/AccountCircle"
 import { useStyles } from "./styles"
+import { useDispatch } from "react-redux"
+import { toggleCatalog } from "../../redux/actions/catalog"
 
 interface IHeaderProps {
   isAuth: boolean
@@ -22,6 +24,7 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({isAuth}) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
   const notificationsCount = 2 // временное решение для отображения badge
@@ -31,6 +34,9 @@ const Header: FC<IHeaderProps> = ({isAuth}) => {
   }
   const handleMenuClose = () => {
     setAnchorEl(null)
+  }
+  const openCatalog = () => {
+    dispatch(toggleCatalog(true))
   }
 
   const ProfileMenu = (
@@ -58,7 +64,7 @@ const Header: FC<IHeaderProps> = ({isAuth}) => {
           <Typography className={classes.title} variant="h6">
             OrenExpress
           </Typography>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={openCatalog}>
             Каталог
           </Button>
           <div className={classes.search}>
