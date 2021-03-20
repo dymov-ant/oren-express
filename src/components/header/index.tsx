@@ -65,48 +65,50 @@ const Header: FC = () => {
   )
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography className={classes.title} variant="h6">
-            OrenExpress
-          </Typography>
-          <Button variant="contained" color="secondary" onClick={openCatalog}>
-            Каталог
-          </Button>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon/>
-            </div>
-            <InputBase
-              placeholder="Я ищу..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{"aria-label": "search"}}
-            />
-          </div>
-          <div className={classes.grow}/>
-          {
-            isAuth
-              ? <div className={classes.sectionButtons}>
-                <IconButton color="inherit">
-                  <Badge badgeContent={notificationsCount} color="secondary">
-                    <CartIcon/>
-                  </Badge>
-                </IconButton>
-                <IconButton color="inherit" onClick={handleMenuOpen}>
-                  <Badge variant="dot" color="secondary" badgeContent={notificationsCount}>
-                    <AccountIcon/>
-                  </Badge>
-                </IconButton>
+    <div className={classes.wrapper}>
+      <div className={classes.grow}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography className={classes.title} variant="h6">
+              OrenExpress
+            </Typography>
+            <Button variant="contained" color="secondary" onClick={openCatalog}>
+              Каталог
+            </Button>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon/>
               </div>
-              : <Button variant="contained" color="secondary" onClick={login}>Войти</Button>
-          }
-        </Toolbar>
-      </AppBar>
-      {ProfileMenu}
+              <InputBase
+                placeholder="Я ищу..."
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{"aria-label": "search"}}
+              />
+            </div>
+            <div className={classes.grow}/>
+            {
+              isAuth
+                ? <div className={classes.sectionButtons}>
+                  <IconButton color="inherit">
+                    <Badge badgeContent={notificationsCount} color="secondary">
+                      <CartIcon/>
+                    </Badge>
+                  </IconButton>
+                  <IconButton color="inherit" onClick={handleMenuOpen}>
+                    <Badge variant="dot" color="secondary" badgeContent={notificationsCount}>
+                      <AccountIcon/>
+                    </Badge>
+                  </IconButton>
+                </div>
+                : <Button variant="contained" color="secondary" onClick={login}>Войти</Button>
+            }
+          </Toolbar>
+        </AppBar>
+        {ProfileMenu}
+      </div>
     </div>
   )
 }

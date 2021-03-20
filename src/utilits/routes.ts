@@ -1,6 +1,7 @@
 import { FC } from "react"
 import {
   CART_ROUTE,
+  CATALOG_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
   PRODUCT_ROUTE,
@@ -15,6 +16,7 @@ import CartPage from "../pages/cartPage"
 import ProductPage from "../pages/productPage"
 import ShopPage from "../pages/shopPage"
 import ProfilePage from "../pages/profilePage"
+import CatalogPage from "../pages/catalogPage"
 
 interface Route {
   path: string
@@ -25,6 +27,14 @@ export const publicRoutes: Route[] = [
   {
     path: MAIN_ROUTE,
     Component: MainPage
+  },
+  {
+    path: CATALOG_ROUTE + "/:id",
+    Component: CatalogPage
+  },
+  {
+    path: PRODUCT_ROUTE + "/:id",
+    Component: ProductPage
   },
   {
     path: LOGIN_ROUTE,
@@ -40,10 +50,6 @@ export const privateRoutes = [
   {
     path: CART_ROUTE,
     Component: CartPage
-  },
-  {
-    path: PRODUCT_ROUTE + "/:id",
-    Component: ProductPage
   },
   {
     path: SHOP_ROUTE + "/:id",

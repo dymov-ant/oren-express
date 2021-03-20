@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useState } from "react"
-import { Collapse, List, ListItem, ListItemText } from "@material-ui/core"
+import { Collapse, Link as MuiLink, List, ListItem, ListItemText } from "@material-ui/core"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
+import { Link } from "react-router-dom"
+import { CATALOG_ROUTE } from "../../../utilits/constants"
+import { useDispatch } from "react-redux"
+import { toggleCatalog } from "../../../redux/actions/catalog"
 
 const getData = (): ICatalogItem[] => {
   return [
@@ -58,7 +62,7 @@ const getData = (): ICatalogItem[] => {
 }
 
 interface ICatalogItem {
-  id?: number
+  id: number
   name: string
   link?: string
   padding?: number
@@ -66,15 +70,23 @@ interface ICatalogItem {
 }
 
 
-const SingleLevel: FC<ICatalogItem> = ({name, padding}) => {
+const SingleLevel: FC<ICatalogItem> = ({id, name, padding}) => {
+  const dispatch = useDispatch()
+  const closeDrawer = () => {
+    dispatch(toggleCatalog(false))
+  }
+
   return (
-    <ListItem button style={{paddingLeft: padding}}>
-      <ListItemText primary={name}/>
-    </ListItem>
+    <MuiLink component={Link} to={CATALOG_ROUTE + `/${id}`} underline="none" color="textPrimary">
+      <ListItem button style={{paddingLeft: padding}} onClick={closeDrawer}>
+        <ListItemText primary={name}/>
+      </ListItem>
+    </MuiLink>
   )
 }
 
-const MultiLevel: FC<ICatalogItem> = ({name, subCatalog = [], padding}) => {
+// const MultiLevel: FC<ICatalogItem> = ({name, subCatalog = [], padding}) => {
+const MultiLevel: FC<ICatalogItem> = ({padding, ...item}) => {
   const [open, setOpen] = useState(false)
   const handleClick = () => {
     setOpen(!open)
@@ -83,14 +95,14 @@ const MultiLevel: FC<ICatalogItem> = ({name, subCatalog = [], padding}) => {
   return (
     <>
       <ListItem button onClick={handleClick} style={{paddingLeft: padding}}>
-        <ListItemText primary={name}/>
+        <ListItemText primary={item.name}/>
         {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {
-            subCatalog.map((item, index) =>
-              <MenuItem name={item.name} subCatalog={item.subCatalog} key={index} padding={padding && padding * 2}/>)
+            item.subCatalog && item.subCatalog.map((catalogItem) =>
+              <MenuItem {...catalogItem} padding={padding && padding * 2} key={catalogItem.id}/>)
           }
         </List>
       </Collapse>
@@ -116,8 +128,8 @@ const CatalogList: FC = () => {
   return (
     <>
       {
-        catalog.map((item, index) =>
-          <MenuItem name={item ? item.name : "dsa"} subCatalog={item && item.subCatalog} key={index} padding={15}/>)
+        catalog.map((item) =>
+          <MenuItem {...item} padding={15} key={item.id}/>)
       }
     </>
   )
