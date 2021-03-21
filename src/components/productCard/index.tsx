@@ -14,11 +14,12 @@ import { Favorite } from "@material-ui/icons"
 import {Link} from "react-router-dom"
 import { useStyles } from "./styles"
 import { PRODUCT_ROUTE } from "../../utilits/constants"
+import { IProduct } from "../../types/productTypes"
 
 const ProductCard = () => {
   const classes = useStyles()
 
-  const product = {
+  const product: IProduct = {
     id: 24,
     shop_id: null,
     user_id: 9,

@@ -2,18 +2,18 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
 export const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
-    width: 220,
+    // width: 220,
+    flex: `0 0 calc(25% - ${theme.spacing(2)}px)`,
     height: 307,
-    margin: theme.spacing(2),
+    margin: `${theme.spacing(1)}px`,
     [theme.breakpoints.down("md")]: {
-      width: 250
+      flex: `0 0 calc(33.3% - ${theme.spacing(2)}px)`
     },
     [theme.breakpoints.down("sm")]: {
-      width: 200,
+      flex: `0 0 calc(50% - ${theme.spacing(2)}px)`
     },
     [theme.breakpoints.down("xs")]: {
-      width: "100%",
-      height: 330
+      flex: `0 0 calc(100% - ${theme.spacing(2)}px)`
     }
   },
   media: {

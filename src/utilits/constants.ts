@@ -8,4 +8,5 @@ export const PROFILE_ROUTE = "/profile"
 export const CATALOG_ROUTE = "/catalog"
 
 export const TOGGLE_CATALOG = "catalog/TOGGLE_CATALOG"
+export const SET_ACTIVE_CATEGORY = "catalog/SET_ACTIVE_CATEGORY"
 export const SET_USER = "profile/SET_USER"

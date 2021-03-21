@@ -4,7 +4,7 @@ import { ExpandLess, ExpandMore } from "@material-ui/icons"
 import { Link } from "react-router-dom"
 import { CATALOG_ROUTE } from "../../../utilits/constants"
 import { useDispatch } from "react-redux"
-import { toggleCatalog } from "../../../redux/actions/catalog"
+import { setActiveCategory, toggleCatalog } from "../../../redux/actions/catalog"
 
 const getData = (): ICatalogItem[] => {
   return [
@@ -73,6 +73,7 @@ interface ICatalogItem {
 const SingleLevel: FC<ICatalogItem> = ({id, name, padding}) => {
   const dispatch = useDispatch()
   const closeDrawer = () => {
+    dispatch(setActiveCategory(name))
     dispatch(toggleCatalog(false))
   }
 
