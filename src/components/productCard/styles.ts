@@ -27,13 +27,23 @@ export const useStyles = makeStyles((theme: Theme) => createStyles({
     }
   },
   title: {
-    maxWidth: `calc(220px - ${theme.spacing(4)}px)`,
+    // maxWidth: `calc(220px - ${theme.spacing(4)}px)`,
+    flex: `0 0 calc(50% - ${theme.spacing(4)}px)`,
     height: 40,
     display: "-webkit-box",
     "-webkit-line-clamp": 2,
     "-webkit-box-orient": "vertical",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
+    [theme.breakpoints.down("md")]: {
+      flex: `0 0 calc(33.3% - ${theme.spacing(4)}px)`
+    },
+    [theme.breakpoints.down("sm")]: {
+      flex: `0 0 calc(50% - ${theme.spacing(4)}px)`
+    },
+    [theme.breakpoints.down("xs")]: {
+      flex: `0 0 calc(100% - ${theme.spacing(4)}px)`
+    }
   },
   actions: {
     display: "flex",
