@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme: Theme) => createStyles({
     alignItems: "top"
   },
   title: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   listFilters: {
     width: 200,
