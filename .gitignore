@@ -2,6 +2,11 @@
 
 # dependencies
 /.idea
+firebase-debug.log
+.firebaserc
+firebase.json
+/.firebase
+/.github
 /node_modules
 /.pnp
 .pnp.js
