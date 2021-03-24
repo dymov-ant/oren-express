@@ -15,3 +15,12 @@ export const registerSchema = Yup.object().shape({
       " а так же цифры и спецсимволы")
     .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
 })
+
+export const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("Обязательное поле")
+    .email("Некорректный email"),
+  password: Yup.string()
+    .required("Обязательное поле")
+    .min(6, "Минимум 6 символов")
+})

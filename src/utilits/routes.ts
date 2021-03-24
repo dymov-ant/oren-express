@@ -10,8 +10,8 @@ import {
   SHOP_ROUTE
 } from "./constants"
 import MainPage from "../pages/mainPage"
-import LoginPage from "../pages/loginPage"
-import RegistrationPage from "../pages/registrationPage"
+import LoginPage from "../pages/authPages/loginPage"
+import RegistrationPage from "../pages/authPages/registrationPage"
 import CartPage from "../pages/cartPage"
 import ProductPage from "../pages/productPage"
 import ShopPage from "../pages/shopPage"

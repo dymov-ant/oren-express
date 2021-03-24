@@ -3,10 +3,11 @@ import { Avatar, Button, Container, Grid, LinearProgress, Link as MuiLink, Typog
 import { LockOutlined } from "@material-ui/icons"
 import { Field, Form, Formik } from "formik"
 import { TextField } from "formik-material-ui"
-import { registerSchema } from "../../utilits/validationSchemes"
-import { useStyles } from "./styles"
 import { Link } from "react-router-dom"
-import { LOGIN_ROUTE } from "../../utilits/constants"
+import { registerSchema } from "../../../utilits/validationSchemes"
+import { LOGIN_ROUTE } from "../../../utilits/constants"
+import { RegisterData } from "../../../types/authTypes"
+import { useStyles } from "../styles"
 
 const RegistrationPage: FC = () => {
   const classes = useStyles()
@@ -16,7 +17,8 @@ const RegistrationPage: FC = () => {
     password2: ""
   }
 
-  const handlerSubmit = (values = initialValues) => {
+  const handlerSubmit = async (values: RegisterData) => {
+    await new Promise((r) => setTimeout(r, 2000))
     console.log(values)
   }
 
@@ -33,7 +35,6 @@ const RegistrationPage: FC = () => {
           initialValues={initialValues}
           validationSchema={registerSchema}
           onSubmit={async values => {
-            await new Promise((r) => setTimeout(r, 2000))
             await handlerSubmit(values)
           }}
         >
