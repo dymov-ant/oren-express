@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { useStyles } from "../styles"
-import { LoginData } from "../../../types/authTypes"
+import { ILoginData } from "../../../types/authTypes"
 import { Avatar, Button, Container, Grid, LinearProgress, Link as MuiLink, Typography } from "@material-ui/core"
 import { LockOutlined } from "@material-ui/icons"
 import { Field, Form, Formik } from "formik"
@@ -16,7 +16,7 @@ const LoginPage: FC = () => {
     password: ""
   }
 
-  const handlerSubmit = (values: LoginData) => {
+  const handlerSubmit = (values: ILoginData) => {
     console.log(values)
   }
 

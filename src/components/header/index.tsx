@@ -19,6 +19,8 @@ import { toggleCatalog } from "../../redux/actions/catalog"
 import { StateType } from "../../redux/store"
 import { setUser } from "../../redux/actions/profile"
 import { useStyles } from "./styles"
+import { Link } from "react-router-dom"
+import { LOGIN_ROUTE } from "../../utilits/constants"
 
 
 const Header: FC = () => {
@@ -37,9 +39,6 @@ const Header: FC = () => {
   }
   const openCatalog = () => {
     dispatch(toggleCatalog(true))
-  }
-  const login = () => {
-    dispatch(setUser({id: 1, name: "test"}))
   }
   const logout = () => {
     setAnchorEl(null)
@@ -103,7 +102,7 @@ const Header: FC = () => {
                     </Badge>
                   </IconButton>
                 </div>
-                : <Button variant="contained" color="secondary" onClick={login}>Войти</Button>
+                : <Button variant="contained" color="secondary" component={Link} to={LOGIN_ROUTE}>Войти</Button>
             }
           </Toolbar>
         </AppBar>

@@ -4,22 +4,21 @@ import { LockOutlined } from "@material-ui/icons"
 import { Field, Form, Formik } from "formik"
 import { TextField } from "formik-material-ui"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { registerSchema } from "../../../utilits/validationSchemes"
 import { LOGIN_ROUTE } from "../../../utilits/constants"
-import { RegisterData } from "../../../types/authTypes"
+import { IRegisterData } from "../../../types/authTypes"
 import { useStyles } from "../styles"
+import { register } from "../../../redux/actions/profile"
 
 const RegistrationPage: FC = () => {
   const classes = useStyles()
-  const initialValues = {
+  const dispatch = useDispatch()
+  const initialValues: IRegisterData = {
+    name: "",
     email: "",
     password: "",
-    password2: ""
-  }
-
-  const handlerSubmit = async (values: RegisterData) => {
-    await new Promise((r) => setTimeout(r, 2000))
-    console.log(values)
+    password_confirmation: ""
   }
 
   return (
@@ -35,11 +34,24 @@ const RegistrationPage: FC = () => {
           initialValues={initialValues}
           validationSchema={registerSchema}
           onSubmit={async values => {
-            await handlerSubmit(values)
+            await dispatch(register(values))
           }}
         >
           {({errors, touched, isSubmitting}) => (
             <Form noValidate className={classes.form}>
+              <Field
+                type="text"
+                name="name"
+                label="Имя"
+                required
+                disabled={isSubmitting}
+                variant="outlined"
+                fullWidth
+                size="small"
+                className={classes.input}
+                helperText={(errors.email && touched.email) && errors.email}
+                component={TextField}
+              />
               <Field
                 type="email"
                 name="email"
@@ -68,7 +80,7 @@ const RegistrationPage: FC = () => {
               />
               <Field
                 type="password"
-                name="password2"
+                name="password_confirmation"
                 label="Повторте пароль"
                 required
                 disabled={isSubmitting}
@@ -76,7 +88,7 @@ const RegistrationPage: FC = () => {
                 fullWidth
                 size="small"
                 className={classes.input}
-                helperText={(errors.password2 && touched.password2) && errors.password2}
+                helperText={(errors.password_confirmation && touched.password_confirmation) && errors.password_confirmation}
                 component={TextField}
               />
               {

@@ -7,7 +7,11 @@ export const PRODUCT_ROUTE = "/product"
 export const PROFILE_ROUTE = "/profile"
 export const CATALOG_ROUTE = "/catalog"
 
-export let regExPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+export const REG_EX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+export const ACCESS_TOKEN = "access_token"
+
+export const LOGIN_API_URL = "login"
+export const REGISTRATION_API_URL = "register"
 
 export const TOGGLE_CATALOG = "catalog/TOGGLE_CATALOG"
 export const SET_ACTIVE_CATEGORY = "catalog/SET_ACTIVE_CATEGORY"
