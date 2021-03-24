@@ -8,16 +8,15 @@ import { loginSchema } from "../../../utilits/validationSchemes"
 import { TextField } from "formik-material-ui"
 import { Link } from "react-router-dom"
 import { REGISTRATION_ROUTE } from "../../../utilits/constants"
+import { useDispatch } from "react-redux"
+import { login } from "../../../redux/actions/profile"
 
 const LoginPage: FC = () => {
   const classes = useStyles()
-  const initialValues = {
+  const dispatch = useDispatch()
+  const initialValues: ILoginData = {
     email: "",
     password: ""
-  }
-
-  const handlerSubmit = (values: ILoginData) => {
-    console.log(values)
   }
 
   return (
@@ -33,8 +32,7 @@ const LoginPage: FC = () => {
           initialValues={initialValues}
           validationSchema={loginSchema}
           onSubmit={async values => {
-            await new Promise((r) => setTimeout(r, 2000))
-            handlerSubmit(values)
+            await dispatch(login(values))
           }}
         >
           {
