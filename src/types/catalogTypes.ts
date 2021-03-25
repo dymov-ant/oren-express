@@ -1,4 +1,16 @@
-import { SET_ACTIVE_CATEGORY, TOGGLE_CATALOG } from "../utilits/constants"
+import { SET_ACTIVE_CATEGORY, SET_CATALOG, TOGGLE_CATALOG } from "../utilits/constants"
+
+export interface ICatalogItem {
+  id: number
+  name: string
+  children?: ICatalogItem[]
+  padding?: number
+}
+
+export interface ISetCatalog {
+  type: typeof SET_CATALOG
+  catalog: ICatalogItem[]
+}
 
 export interface IToggleCatalog {
   type: typeof TOGGLE_CATALOG
@@ -10,4 +22,4 @@ export interface ISetActiveCategory {
   category: string
 }
 
-export type CatalogActionTypes = IToggleCatalog | ISetActiveCategory
+export type CatalogActionTypes = ISetCatalog | IToggleCatalog | ISetActiveCategory

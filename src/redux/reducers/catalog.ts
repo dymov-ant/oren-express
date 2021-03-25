@@ -1,18 +1,25 @@
-import { CatalogActionTypes } from "../../types/catalogTypes"
-import { SET_ACTIVE_CATEGORY, TOGGLE_CATALOG } from "../../utilits/constants"
+import { CatalogActionTypes, ICatalogItem } from "../../types/catalogTypes"
+import { SET_ACTIVE_CATEGORY, SET_CATALOG, TOGGLE_CATALOG } from "../../utilits/constants"
 
 interface ICatalogState {
   open: boolean,
-  activeCategory: string
+  activeCategory: string,
+  catalog: ICatalogItem[]
 }
 
 const initialState: ICatalogState = {
   open: false,
-  activeCategory: ""
+  activeCategory: "",
+  catalog: []
 }
 
 export const catalogReducer = (state = initialState, action: CatalogActionTypes): ICatalogState => {
   switch (action.type) {
+    case SET_CATALOG:
+      return {
+        ...state,
+        catalog: action.catalog
+      }
     case TOGGLE_CATALOG:
       return {
         ...state,
