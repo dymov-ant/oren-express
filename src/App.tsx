@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
-import { CircularProgress, Container, Grid } from "@material-ui/core"
+import { Container } from "@material-ui/core"
 import AppRoutes from "./components/appRoutes"
 import Header from "./components/header"
 import Catalog from "./components/catalog"
 import { useDispatch, useSelector } from "react-redux"
 import { initialization } from "./redux/actions/app"
 import { StateType } from "./redux/store"
+import AppLoad from "./appLoad"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -16,11 +17,7 @@ const App = () => {
 
   if (!isInitialized) {
     return (
-      <Grid container justify="center" alignItems="center" style={{height: "100vh"}}>
-        <Grid item>
-          <CircularProgress/>
-        </Grid>
-      </Grid>
+      <AppLoad/>
     )
   }
 
