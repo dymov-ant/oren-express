@@ -5,34 +5,40 @@ import { StateType } from "../../redux/store"
 import { addBreadcrumbsItem, clearBreadcrumbs } from "../../redux/actions/catalog"
 import { getCategoryNameById } from "../../utilits/getCategoryNameById"
 import { CATALOG_ROUTE, PRODUCT_ROUTE } from "../../utilits/constants"
+import { setSelectedProduct } from "../../redux/actions/product"
+import { useLocation } from "react-router-dom"
 
 const ProductPage: FC = () => {
   const dispatch = useDispatch()
-  const product = {
-    id: 1,
-    category_id: 22,
-    name: "product"
-  }
   const catalog = useSelector((state: StateType) => state.catalogReducer.catalog)
-  const categoryName = getCategoryNameById(catalog, product.category_id)
-  const breadcrumbsMap = useSelector((state: StateType) => state.catalogReducer.breadcrumbs)
+  const {pathname} = useLocation()
+  const productId = pathname.split("/")[2]
+  useEffect(() => {
+    dispatch(setSelectedProduct(+productId))
+  }, [dispatch, productId])
+  const product = useSelector((state: StateType) => state.productReducer.selectedProduct)
   useEffect(() => {
     dispatch(clearBreadcrumbs())
-    if (categoryName) {
-      dispatch(addBreadcrumbsItem({
-        to: `${CATALOG_ROUTE}/${product.category_id}`,
-        name: categoryName
-      }))
-      dispatch(addBreadcrumbsItem({
-        to: `${PRODUCT_ROUTE}/${product.id}`,
-        name: product.name
-      }))
+    if (product) {
+      const categoryName = getCategoryNameById(catalog, product.category_id)
+      if (categoryName) {
+        dispatch(addBreadcrumbsItem({
+          to: `${CATALOG_ROUTE}/${product.category_id}`,
+          name: categoryName
+        }))
+        dispatch(addBreadcrumbsItem({
+          to: `${PRODUCT_ROUTE}/${product.id}`,
+          name: product.name
+        }))
+      }
     }
-  }, [categoryName, dispatch, product.category_id, product.id, product.name])
+  }, [dispatch, catalog, product])
+  const breadcrumbsMap = useSelector((state: StateType) => state.catalogReducer.breadcrumbs)
+
   return (
     <div>
       <Breadcrumbs breadcrumbsMap={breadcrumbsMap}/>
-      <h1>ProductPage</h1>
+      <h1>{product?.name}</h1>
     </div>
   )
 }

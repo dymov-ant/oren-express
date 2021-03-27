@@ -10,7 +10,6 @@ import {
 import {
   ADD_BREADCRUMBS_ITEM,
   CLEAR_BREADCRUMBS,
-  SET_ACTIVE_CATEGORY,
   SET_CATALOG,
   TOGGLE_CATALOG
 } from "../../utilits/constants"
