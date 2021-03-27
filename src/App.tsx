@@ -6,14 +6,14 @@ import Catalog from "./components/catalog"
 import { useDispatch, useSelector } from "react-redux"
 import { initialization } from "./redux/actions/app"
 import { StateType } from "./redux/store"
-import AppLoad from "./appLoad"
+import AppLoad from "./components/appLoad"
 
 const App = () => {
   const dispatch = useDispatch()
   const isInitialized = useSelector((state: StateType) => state.appReducer.isInitialized)
   useEffect(() => {
     dispatch(initialization())
-  }, [])
+  }, [dispatch])
 
   if (!isInitialized) {
     return (

@@ -1,27 +1,29 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useStyles } from "./styles"
 import ProductCard from "../../components/productCard"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
+import { getProducts } from "../../redux/actions/product"
 import { StateType } from "../../redux/store"
-import { Typography } from "@material-ui/core"
 
 const CatalogPage = () => {
   const classes = useStyles()
-  const categoryName = useSelector((state: StateType) => state.catalogReducer.activeCategory)
+  const dispatch = useDispatch()
+  const {pathname} = useLocation()
+  const catalogId = pathname.split("/")[2]
+
+  useEffect(() => {
+    dispatch(getProducts(+catalogId))
+  }, [catalogId, dispatch])
+  const products = useSelector((state: StateType) => state.productReducer.products)
 
   return (
     <>
-      <Typography variant="h4" component="h3" className={classes.title}>
-        {categoryName}
-      </Typography>
       <div className={classes.root}>
-        {/*<div className={classes.listFilters}>*/}
-        {/*  фильтры*/}
-        {/*</div>*/}
 
         <div className={classes.listProducts}>
           {
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(i=> <ProductCard key={i}/>)
+            products.map(item=> <ProductCard {...item} key={item.id}/>)
           }
         </div>
       </div>
