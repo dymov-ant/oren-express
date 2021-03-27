@@ -1,11 +1,20 @@
 import {
   CatalogActionTypes,
+  IAddBreadcrumbsItem,
+  IBreadcrumb,
   ICatalogItem,
+  IClearBreadcrumbs,
   ISetActiveCategory,
   ISetCatalog,
   IToggleCatalog
 } from "../../types/catalogTypes"
-import { SET_ACTIVE_CATEGORY, SET_CATALOG, TOGGLE_CATALOG } from "../../utilits/constants"
+import {
+  ADD_BREADCRUMBS_ITEM,
+  CLEAR_BREADCRUMBS,
+  SET_ACTIVE_CATEGORY,
+  SET_CATALOG,
+  TOGGLE_CATALOG
+} from "../../utilits/constants"
 import { ThunkAction } from "redux-thunk"
 import { StateType } from "../store"
 import catalogAPI from "../../utilits/api/catalogAPI"
@@ -23,6 +32,15 @@ export const toggleCatalog = (isOpen: boolean): IToggleCatalog => ({
 export const setActiveCategory = (category: string): ISetActiveCategory => ({
   type: SET_ACTIVE_CATEGORY,
   category
+})
+
+export const addBreadcrumbsItem = (breadcrumbsItem: IBreadcrumb): IAddBreadcrumbsItem => ({
+  type: ADD_BREADCRUMBS_ITEM,
+  breadcrumbsItem
+})
+
+export const clearBreadcrumbs = (): IClearBreadcrumbs => ({
+  type: CLEAR_BREADCRUMBS
 })
 
 export type CatalogThunkType = ThunkAction<Promise<void>, StateType, unknown, CatalogActionTypes>

@@ -1,7 +1,6 @@
 import { ICatalogItem } from "../types/catalogTypes"
 
 export const getCategoryNameById = (arr: ICatalogItem[], id: number): string | undefined => {
-  debugger
   let res: string | undefined = ""
   for (const item of arr) {
     if (res) return res

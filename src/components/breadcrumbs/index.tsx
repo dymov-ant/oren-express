@@ -2,19 +2,19 @@ import React, { FC } from "react"
 import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { NavigateNext } from "@material-ui/icons"
-
-interface IBreadcrumbs {
-  to: string
-  name: string
-}
+import { IBreadcrumb } from "../../types/catalogTypes"
+import { MAIN_ROUTE } from "../../utilits/constants"
 
 interface BreadcrumbsProps {
-  breadcrumbsMap: IBreadcrumbs[]
+  breadcrumbsMap: IBreadcrumb[]
 }
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({breadcrumbsMap}) => {
   return (
     <MuiBreadcrumbs aria-label="breadcrumb" separator={<NavigateNext fontSize="small"/>}>
+      <MuiLink color="inherit" component={Link} to={MAIN_ROUTE} key={MAIN_ROUTE}>
+        Главная
+      </MuiLink>
       {
         breadcrumbsMap.map((item, index) => {
           const last = index === breadcrumbsMap.length - 1

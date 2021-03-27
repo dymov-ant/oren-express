@@ -13,7 +13,7 @@ const App = () => {
   const isInitialized = useSelector((state: StateType) => state.appReducer.isInitialized)
   useEffect(() => {
     dispatch(initialization())
-  }, [])
+  }, [dispatch])
 
   if (!isInitialized) {
     return (
