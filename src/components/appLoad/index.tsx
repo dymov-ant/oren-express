@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { Grid } from "@material-ui/core"
-import { useStyles } from "./styles"
 import appLoad from "../../common/appLoad.gif"
+import { useStyles } from "./styles"
 
 const AppLoad: FC = () => {
   const classes = useStyles()

@@ -15,12 +15,12 @@ import SearchIcon from "@material-ui/icons/Search"
 import CartIcon from "@material-ui/icons/ShoppingCart"
 import AccountIcon from "@material-ui/icons/AccountCircle"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { toggleCatalog } from "../../redux/actions/catalog"
 import { StateType } from "../../redux/store"
 import { setUser } from "../../redux/actions/profile"
-import { useStyles } from "./styles"
-import { Link } from "react-router-dom"
 import { LOGIN_ROUTE } from "../../utilits/constants"
+import { useStyles } from "./styles"
 
 
 const Header: FC = () => {

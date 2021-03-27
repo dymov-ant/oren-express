@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core"
 import { Favorite } from "@material-ui/icons"
 import {Link} from "react-router-dom"
-import { useStyles } from "./styles"
 import { PRODUCT_ROUTE } from "../../utilits/constants"
 import { IProduct } from "../../types/productType"
+import { useStyles } from "./styles"
 
 const ProductCard: FC<IProduct> = (props) => {
   const classes = useStyles()

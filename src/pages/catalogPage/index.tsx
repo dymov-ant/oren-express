@@ -1,14 +1,14 @@
 import React, { useEffect } from "react"
+import { Typography } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
-import { useStyles } from "./styles"
-import ProductCard from "../../components/productCard"
 import { useLocation } from "react-router-dom"
+import ProductCard from "../../components/productCard"
 import { getProducts } from "../../redux/actions/product"
 import { StateType } from "../../redux/store"
-import { Typography } from "@material-ui/core"
 import { addBreadcrumbsItem, clearBreadcrumbs } from "../../redux/actions/catalog"
 import Breadcrumbs from "../../components/breadcrumbs"
 import { getCategoryNameById } from "../../utilits/getCategoryNameById"
+import { useStyles } from "./styles"
 
 const CatalogPage = () => {
   const classes = useStyles()

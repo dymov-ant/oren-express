@@ -1,10 +1,10 @@
 import React, { KeyboardEvent, MouseEvent } from "react"
-import { useStyles } from "./styles"
 import { Drawer } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { StateType } from "../../redux/store"
 import { toggleCatalog } from "../../redux/actions/catalog"
 import CatalogList from "./list"
+import { useStyles } from "./styles"
 
 
 const Catalog = () => {

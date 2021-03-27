@@ -1,15 +1,15 @@
 import React, { FC } from "react"
-import { useStyles } from "../styles"
-import { ILoginData } from "../../../types/authTypes"
 import { Avatar, Button, Container, Grid, LinearProgress, Link as MuiLink, Typography } from "@material-ui/core"
 import { LockOutlined } from "@material-ui/icons"
-import { Field, Form, Formik } from "formik"
-import { loginSchema } from "../../../utilits/validationSchemes"
-import { TextField } from "formik-material-ui"
 import { Link } from "react-router-dom"
-import { REGISTRATION_ROUTE } from "../../../utilits/constants"
 import { useDispatch } from "react-redux"
+import { Field, Form, Formik } from "formik"
+import { TextField } from "formik-material-ui"
+import { ILoginData } from "../../../types/authTypes"
+import { loginSchema } from "../../../utilits/validationSchemes"
+import { REGISTRATION_ROUTE } from "../../../utilits/constants"
 import { login } from "../../../redux/actions/profile"
+import { useStyles } from "../styles"
 
 const LoginPage: FC = () => {
   const classes = useStyles()

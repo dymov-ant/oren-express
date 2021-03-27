@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from "react"
 import Breadcrumbs from "../../components/breadcrumbs"
 import { useDispatch, useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
 import { StateType } from "../../redux/store"
 import { addBreadcrumbsItem, clearBreadcrumbs } from "../../redux/actions/catalog"
 import { getCategoryNameById } from "../../utilits/getCategoryNameById"
 import { CATALOG_ROUTE, PRODUCT_ROUTE } from "../../utilits/constants"
 import { setSelectedProduct } from "../../redux/actions/product"
-import { useLocation } from "react-router-dom"
 
 const ProductPage: FC = () => {
   const dispatch = useDispatch()

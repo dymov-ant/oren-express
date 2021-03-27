@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux"
 import { registerSchema } from "../../../utilits/validationSchemes"
 import { LOGIN_ROUTE } from "../../../utilits/constants"
 import { IRegisterData } from "../../../types/authTypes"
-import { useStyles } from "../styles"
 import { register } from "../../../redux/actions/profile"
+import { useStyles } from "../styles"
 
 const RegistrationPage: FC = () => {
   const classes = useStyles()
