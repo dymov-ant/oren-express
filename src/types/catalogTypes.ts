@@ -1,4 +1,13 @@
-import { SET_CATALOG, TOGGLE_CATALOG } from "../utilits/constants"
+import {
+  ADD_BREADCRUMBS_ITEM, CLEAR_BREADCRUMBS,
+  SET_CATALOG,
+  TOGGLE_CATALOG
+} from "../utilits/constants"
+
+export interface IBreadcrumb {
+  to: string
+  name: string
+}
 
 export interface ICatalogItem {
   id: number
@@ -17,4 +26,17 @@ export interface IToggleCatalog {
   isOpen: boolean
 }
 
-export type CatalogActionTypes = ISetCatalog | IToggleCatalog
+export interface IAddBreadcrumbsItem {
+  type: typeof ADD_BREADCRUMBS_ITEM
+  breadcrumbsItem: IBreadcrumb
+}
+
+export interface IClearBreadcrumbs {
+  type: typeof CLEAR_BREADCRUMBS
+}
+
+export type CatalogActionTypes =
+  ISetCatalog
+  | IToggleCatalog
+  | IAddBreadcrumbsItem
+  | IClearBreadcrumbs

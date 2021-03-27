@@ -1,14 +1,21 @@
-import { CatalogActionTypes, ICatalogItem } from "../../types/catalogTypes"
-import { SET_CATALOG, TOGGLE_CATALOG } from "../../utilits/constants"
+import { CatalogActionTypes, IBreadcrumb, ICatalogItem } from "../../types/catalogTypes"
+import {
+  ADD_BREADCRUMBS_ITEM,
+  CLEAR_BREADCRUMBS,
+  SET_CATALOG,
+  TOGGLE_CATALOG
+} from "../../utilits/constants"
 
 interface ICatalogState {
   open: boolean
-  catalog: ICatalogItem[]
+  catalog: ICatalogItem[],
+  breadcrumbs: IBreadcrumb[]
 }
 
 const initialState: ICatalogState = {
   open: false,
-  catalog: []
+  catalog: [],
+  breadcrumbs: []
 }
 
 export const catalogReducer = (state = initialState, action: CatalogActionTypes): ICatalogState => {
@@ -22,6 +29,16 @@ export const catalogReducer = (state = initialState, action: CatalogActionTypes)
       return {
         ...state,
         open: action.isOpen
+      }
+    case ADD_BREADCRUMBS_ITEM:
+      return {
+        ...state,
+        breadcrumbs: [...state.breadcrumbs, action.breadcrumbsItem]
+      }
+    case CLEAR_BREADCRUMBS:
+      return {
+        ...state,
+        breadcrumbs: []
       }
     default:
       return state

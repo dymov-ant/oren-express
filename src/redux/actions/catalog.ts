@@ -1,5 +1,19 @@
-import { CatalogActionTypes, ICatalogItem, ISetCatalog, IToggleCatalog } from "../../types/catalogTypes"
-import { SET_CATALOG, TOGGLE_CATALOG } from "../../utilits/constants"
+import {
+  CatalogActionTypes,
+  IAddBreadcrumbsItem,
+  IBreadcrumb,
+  ICatalogItem,
+  IClearBreadcrumbs,
+  ISetCatalog,
+  IToggleCatalog
+} from "../../types/catalogTypes"
+import {
+  ADD_BREADCRUMBS_ITEM,
+  CLEAR_BREADCRUMBS,
+  SET_ACTIVE_CATEGORY,
+  SET_CATALOG,
+  TOGGLE_CATALOG
+} from "../../utilits/constants"
 import { ThunkAction } from "redux-thunk"
 import { StateType } from "../store"
 import catalogAPI from "../../utilits/api/catalogAPI"
@@ -14,7 +28,16 @@ export const toggleCatalog = (isOpen: boolean): IToggleCatalog => ({
   isOpen
 })
 
-type CatalogThunkType = ThunkAction<Promise<void>, StateType, unknown, CatalogActionTypes>
+export const addBreadcrumbsItem = (breadcrumbsItem: IBreadcrumb): IAddBreadcrumbsItem => ({
+  type: ADD_BREADCRUMBS_ITEM,
+  breadcrumbsItem
+})
+
+export const clearBreadcrumbs = (): IClearBreadcrumbs => ({
+  type: CLEAR_BREADCRUMBS
+})
+
+export type CatalogThunkType = ThunkAction<Promise<void>, StateType, unknown, CatalogActionTypes>
 
 export const getCatalog = (): CatalogThunkType => async dispatch => {
   try {

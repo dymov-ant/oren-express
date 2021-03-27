@@ -16,6 +16,8 @@ export const CATALOG_API_URL = "categories"
 
 export const SET_CATALOG = "catalog/SET_CATALOG"
 export const TOGGLE_CATALOG = "catalog/TOGGLE_CATALOG"
+export const ADD_BREADCRUMBS_ITEM = "catalog/ADD_BREADCRUMBS_ITEM"
+export const CLEAR_BREADCRUMBS = "catalog/CLEAR_BREADCRUMBS"
 export const SET_USER = "profile/SET_USER"
 export const SET_MESSAGE = "app/SET_MESSAGE"
 export const SET_INITIALIZED = "app/SET_INITIALIZED"
