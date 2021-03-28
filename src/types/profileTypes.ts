@@ -3,6 +3,7 @@ import { SET_USER } from "../utilits/constants"
 export interface IUser {
   id: number
   name: string
+  email: string
 }
 
 export interface ISetUser {

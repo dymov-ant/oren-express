@@ -12,6 +12,7 @@ export const ACCESS_TOKEN = "access_token"
 
 export const LOGIN_API_URL = "login"
 export const REGISTRATION_API_URL = "register"
+export const GET_USER_DATA_API_URL = "get-user-data"
 export const CATALOG_API_URL = "categories"
 
 export const SET_CATALOG = "catalog/SET_CATALOG"

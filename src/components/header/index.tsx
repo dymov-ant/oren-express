@@ -29,6 +29,7 @@ const Header: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
   const isAuth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
+  const userName = useSelector((state: StateType) => state.profileReducer.user?.name)
   const notificationsCount = 2 // временное решение для отображения badge
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -54,7 +55,9 @@ const Header: FC = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>Профиль</Badge>
+        <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>
+          {userName}
+        </Badge>
       </MenuItem>
       <Divider light/>
       <MenuItem onClick={handleLogout} color="secondary">

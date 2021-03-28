@@ -1,11 +1,11 @@
+import { Dispatch } from "redux"
 import { ThunkAction } from "redux-thunk"
 import { ISetUser, IUser, ProfileActionsType } from "../../types/profileTypes"
 import { ACCESS_TOKEN, SET_USER } from "../../utilits/constants"
 import { StateType } from "../store"
 import { ILoginData, IRegisterData } from "../../types/authTypes"
 import authAPI from "../../utilits/api/authAPI"
-import jwtDecode from "jwt-decode"
-import { Dispatch } from "redux"
+import profileAPI from "../../utilits/api/profileAPI"
 
 export const setUser = (user: IUser | null): ISetUser => ({
   type: SET_USER,
@@ -25,13 +25,7 @@ export const register = (registerData: IRegisterData): ProfileThunkType => async
     if (response.status === 201) {
       const {token} = response.data
       localStorage.setItem(ACCESS_TOKEN, token)
-      const decoded = jwtDecode(token)
-      console.log("decoded", decoded)
-      // todo Константин не хочет делать получение данных о пользователе
-      dispatch(setUser({
-        id: 1,
-        name: "userName"
-      }))
+      await dispatch(getUserData())
     }
   } catch (e) {
     console.log(e.response)
@@ -44,12 +38,21 @@ export const login = (loginData: ILoginData): ProfileThunkType => async dispatch
     if (response.status === 200) {
       const {token} = response.data
       localStorage.setItem(ACCESS_TOKEN, token)
-      const decoded = jwtDecode(token)
-      console.log("decoded", decoded)
-      // todo Константин и тут не хочет делать получение данных о пользователе
+      await dispatch(getUserData())
+    }
+  } catch (e) {
+    console.log(e.response)
+  }
+}
+
+export const getUserData = (): ProfileThunkType => async dispatch => {
+  try {
+    const response = await profileAPI.getUserData()
+    if (response.status === 200) {
       dispatch(setUser({
-        id: 1,
-        name: "userName"
+        id: response.data.id,
+        name: response.data.name,
+        email: response.data.email
       }))
     }
   } catch (e) {
