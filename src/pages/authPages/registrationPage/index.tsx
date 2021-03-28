@@ -3,22 +3,28 @@ import { Avatar, Button, Container, Grid, LinearProgress, Link as MuiLink, Typog
 import { LockOutlined } from "@material-ui/icons"
 import { Field, Form, Formik } from "formik"
 import { TextField } from "formik-material-ui"
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { Link, Redirect } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { registerSchema } from "../../../utilits/validationSchemes"
-import { LOGIN_ROUTE } from "../../../utilits/constants"
+import { LOGIN_ROUTE, MAIN_ROUTE } from "../../../utilits/constants"
 import { IRegisterData } from "../../../types/authTypes"
 import { register } from "../../../redux/actions/profile"
+import { StateType } from "../../../redux/store"
 import { useStyles } from "../styles"
 
 const RegistrationPage: FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const auth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
   const initialValues: IRegisterData = {
     name: "",
     email: "",
     password: "",
     password_confirmation: ""
+  }
+
+  if (auth) {
+    return <Redirect to={MAIN_ROUTE}/>
   }
 
   return (
@@ -49,7 +55,7 @@ const RegistrationPage: FC = () => {
                 fullWidth
                 size="small"
                 className={classes.input}
-                helperText={(errors.email && touched.email) && errors.email}
+                helperText={(errors.name && touched.name) && errors.name}
                 component={TextField}
               />
               <Field

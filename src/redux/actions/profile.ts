@@ -5,19 +5,24 @@ import { StateType } from "../store"
 import { ILoginData, IRegisterData } from "../../types/authTypes"
 import authAPI from "../../utilits/api/authAPI"
 import jwtDecode from "jwt-decode"
+import { Dispatch } from "redux"
 
 export const setUser = (user: IUser | null): ISetUser => ({
   type: SET_USER,
   payload: user
 })
 
+export const logout = () => (dispatch: Dispatch) => {
+  localStorage.removeItem(ACCESS_TOKEN)
+  dispatch(setUser(null))
+}
+
 type ProfileThunkType = ThunkAction<Promise<void>, StateType, unknown, ProfileActionsType>
 
 export const register = (registerData: IRegisterData): ProfileThunkType => async dispatch => {
   try {
     const response = await authAPI.register(registerData)
-    // todo нужно будет поменять статус на 201 когда Константин соизволит поправить бэк
-    if (response.status === 200) {
+    if (response.status === 201) {
       const {token} = response.data
       localStorage.setItem(ACCESS_TOKEN, token)
       const decoded = jwtDecode(token)

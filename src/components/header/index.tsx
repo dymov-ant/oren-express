@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { toggleCatalog } from "../../redux/actions/catalog"
 import { StateType } from "../../redux/store"
-import { setUser } from "../../redux/actions/profile"
+import { logout } from "../../redux/actions/profile"
 import { LOGIN_ROUTE } from "../../utilits/constants"
 import { useStyles } from "./styles"
 
@@ -40,9 +40,9 @@ const Header: FC = () => {
   const openCatalog = () => {
     dispatch(toggleCatalog(true))
   }
-  const logout = () => {
+  const handleLogout = () => {
     setAnchorEl(null)
-    dispatch(setUser(null))
+    dispatch(logout())
   }
 
   const ProfileMenu = (
@@ -57,7 +57,7 @@ const Header: FC = () => {
         <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>Профиль</Badge>
       </MenuItem>
       <Divider light/>
-      <MenuItem onClick={logout} color="secondary">
+      <MenuItem onClick={handleLogout} color="secondary">
         <Typography color="secondary">Выход</Typography>
       </MenuItem>
     </Menu>

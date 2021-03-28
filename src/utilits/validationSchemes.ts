@@ -2,6 +2,9 @@ import * as Yup from "yup"
 import { REG_EX_PASSWORD } from "./constants"
 
 export const registerSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Обязательное поле")
+    .min(4, "Минимум 4 символа"),
   email: Yup.string()
     .required("Обязательное поле")
     .email("Некорректный email"),

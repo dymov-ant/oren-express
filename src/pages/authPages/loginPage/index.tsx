@@ -1,22 +1,28 @@
 import React, { FC } from "react"
 import { Avatar, Button, Container, Grid, LinearProgress, Link as MuiLink, Typography } from "@material-ui/core"
 import { LockOutlined } from "@material-ui/icons"
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { Link, Redirect } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { Field, Form, Formik } from "formik"
 import { TextField } from "formik-material-ui"
 import { ILoginData } from "../../../types/authTypes"
 import { loginSchema } from "../../../utilits/validationSchemes"
-import { REGISTRATION_ROUTE } from "../../../utilits/constants"
+import { MAIN_ROUTE, REGISTRATION_ROUTE } from "../../../utilits/constants"
 import { login } from "../../../redux/actions/profile"
+import { StateType } from "../../../redux/store"
 import { useStyles } from "../styles"
 
 const LoginPage: FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const auth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
   const initialValues: ILoginData = {
     email: "",
     password: ""
+  }
+
+  if (auth) {
+    return <Redirect to={MAIN_ROUTE}/>
   }
 
   return (
