@@ -1,12 +1,18 @@
 import { ThunkAction } from "redux-thunk"
 import {
   IProduct,
+  ISetLastViewedProducts,
   ISetProducts,
   ISetSelectedProduct,
   ISetTotalCountProduct,
   ProductActionTypes
 } from "../../types/productType"
-import { SET_PRODUCTS, SET_SELECTED_PRODUCT, SET_TOTAL_COUNT_PRODUCTS } from "../../utilits/constants"
+import {
+  SET_LAST_VIEWED_PRODUCTS,
+  SET_PRODUCTS,
+  SET_SELECTED_PRODUCT,
+  SET_TOTAL_COUNT_PRODUCTS
+} from "../../utilits/constants"
 import { StateType } from "../store"
 import productAPI from "../../utilits/api/productAPI"
 
@@ -25,6 +31,10 @@ export const setSelectedProduct = (productId: number): ISetSelectedProduct => ({
   productId
 })
 
+export const setLastViewedProducts = (products: IProduct[]): ISetLastViewedProducts => ({
+  type: SET_LAST_VIEWED_PRODUCTS,
+  products
+})
 
 type ProductThunkType = ThunkAction<Promise<void>, StateType, unknown, ProductActionTypes>
 

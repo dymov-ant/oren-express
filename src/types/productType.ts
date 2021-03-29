@@ -1,4 +1,9 @@
-import { SET_PRODUCTS, SET_SELECTED_PRODUCT, SET_TOTAL_COUNT_PRODUCTS } from "../utilits/constants"
+import {
+  SET_LAST_VIEWED_PRODUCTS,
+  SET_PRODUCTS,
+  SET_SELECTED_PRODUCT,
+  SET_TOTAL_COUNT_PRODUCTS
+} from "../utilits/constants"
 
 export interface IProduct {
   id: number
@@ -34,4 +39,12 @@ export interface ISetSelectedProduct {
   productId: number
 }
 
-export type ProductActionTypes = ISetProducts | ISetTotalCountProduct | ISetSelectedProduct
+export interface ISetLastViewedProducts {
+  type: typeof SET_LAST_VIEWED_PRODUCTS
+  products: IProduct[]
+}
+
+export type ProductActionTypes = ISetProducts
+  | ISetTotalCountProduct
+  | ISetSelectedProduct
+  | ISetLastViewedProducts

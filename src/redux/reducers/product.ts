@@ -1,16 +1,23 @@
 import { IProduct, ProductActionTypes } from "../../types/productType"
-import { SET_PRODUCTS, SET_SELECTED_PRODUCT, SET_TOTAL_COUNT_PRODUCTS } from "../../utilits/constants"
+import {
+  SET_LAST_VIEWED_PRODUCTS,
+  SET_PRODUCTS,
+  SET_SELECTED_PRODUCT,
+  SET_TOTAL_COUNT_PRODUCTS
+} from "../../utilits/constants"
 
 interface IProductState {
   products: IProduct[]
-  totalCountProducts: number,
+  totalCountProducts: number
   selectedProduct: IProduct | null
+  lastViewedProducts: IProduct[]
 }
 
 const initialState: IProductState = {
   products: [],
   totalCountProducts: 0,
-  selectedProduct: null
+  selectedProduct: null,
+  lastViewedProducts: []
 }
 
 export const productReducer = (state = initialState, action: ProductActionTypes): IProductState => {
@@ -29,6 +36,11 @@ export const productReducer = (state = initialState, action: ProductActionTypes)
       return {
         ...state,
         selectedProduct: state.products.find(product => product.id === action.productId) || null
+      }
+    case SET_LAST_VIEWED_PRODUCTS:
+      return {
+        ...state,
+        lastViewedProducts: action.products
       }
     default:
       return state

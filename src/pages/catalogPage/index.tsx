@@ -2,12 +2,13 @@ import React, { useEffect } from "react"
 import { Typography } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
-import ProductCard from "../../components/productCard"
+// import ProductCard from "../../components/productCard"
 import { getProducts } from "../../redux/actions/product"
 import { StateType } from "../../redux/store"
 import { addBreadcrumbsItem, clearBreadcrumbs } from "../../redux/actions/catalog"
 import Breadcrumbs from "../../components/breadcrumbs"
 import { getCategoryNameById } from "../../utilits/getCategoryNameById"
+import ProductList from "../../components/productList"
 import { useStyles } from "./styles"
 
 const CatalogPage = () => {
@@ -40,12 +41,12 @@ const CatalogPage = () => {
         {categoryName}
       </Typography>
       <div className={classes.root}>
-
-        <div className={classes.listProducts}>
-          {
-            products.map(item=> <ProductCard {...item} key={item.id}/>)
-          }
-        </div>
+        <ProductList products={products}/>
+        {/*<div className={classes.listProducts}>*/}
+        {/*  {*/}
+        {/*    products.map(item=> <ProductCard {...item} key={item.id}/>)*/}
+        {/*  }*/}
+        {/*</div>*/}
       </div>
     </>
   )
