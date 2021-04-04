@@ -27,3 +27,12 @@ export const loginSchema = Yup.object().shape({
     .required("Обязательное поле")
     .min(6, "Минимум 6 символов")
 })
+
+export const settingProfileSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Обязательное поле")
+    .min(4, "Минимум 4 символа"),
+  email: Yup.string()
+    .required("Обязательное поле")
+    .email("Некорректный email")
+})
