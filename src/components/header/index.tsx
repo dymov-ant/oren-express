@@ -6,6 +6,7 @@ import {
   Divider,
   IconButton,
   InputBase,
+  Link as MuiLink,
   Menu,
   MenuItem,
   Toolbar,
@@ -19,7 +20,7 @@ import { Link } from "react-router-dom"
 import { toggleCatalog } from "../../redux/actions/catalog"
 import { StateType } from "../../redux/store"
 import { logout } from "../../redux/actions/profile"
-import { LOGIN_ROUTE } from "../../utilits/constants"
+import { LOGIN_ROUTE, PROFILE_ROUTE } from "../../utilits/constants"
 import { useStyles } from "./styles"
 
 
@@ -29,7 +30,7 @@ const Header: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
   const isAuth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
-  const userName = useSelector((state: StateType) => state.profileReducer.user?.name)
+  const user = useSelector((state: StateType) => state.profileReducer.user)
   const notificationsCount = 2 // временное решение для отображения badge
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -55,9 +56,11 @@ const Header: FC = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>
-          {userName}
-        </Badge>
+        <MuiLink component={Link} to={PROFILE_ROUTE + `/${user?.id}`} underline="none" color="textPrimary">
+          <Badge color="secondary" variant="dot" badgeContent={notificationsCount}>
+            {user?.name}
+          </Badge>
+        </MuiLink>
       </MenuItem>
       <Divider light/>
       <MenuItem onClick={handleLogout} color="secondary">
