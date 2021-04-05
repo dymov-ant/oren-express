@@ -2,9 +2,11 @@ import React from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
 import { privateRoutes, publicRoutes } from "../utilits/routes"
 import { MAIN_ROUTE } from "../utilits/constants"
+import { useSelector } from "react-redux"
+import { StateType } from "../redux/store"
 
 const AppRoutes = () => {
-  const isAuth = false
+  const isAuth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
 
   return (
     <Switch>

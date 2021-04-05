@@ -6,6 +6,7 @@ export const SHOP_ROUTE = "/shop"
 export const PRODUCT_ROUTE = "/product"
 export const PROFILE_ROUTE = "/profile"
 export const CATALOG_ROUTE = "/catalog"
+export const SETTINGS_PAGE = "/settings"
 
 export const REG_EX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 export const ACCESS_TOKEN = "access_token"

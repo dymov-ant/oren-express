@@ -7,6 +7,7 @@ import {
   PRODUCT_ROUTE,
   PROFILE_ROUTE,
   REGISTRATION_ROUTE,
+  SETTINGS_PAGE,
   SHOP_ROUTE
 } from "./constants"
 import MainPage from "../pages/mainPage"
@@ -17,6 +18,7 @@ import ProductPage from "../pages/productPage"
 import ShopPage from "../pages/shopPage"
 import ProfilePage from "../pages/profilePage"
 import CatalogPage from "../pages/catalogPage"
+import SettingsPage from "../pages/settingsPage"
 
 interface Route {
   path: string
@@ -58,5 +60,9 @@ export const privateRoutes = [
   {
     path: PROFILE_ROUTE + "/:id",
     Component: ProfilePage
+  },
+  {
+    path: SETTINGS_PAGE,
+    Component: SettingsPage
   }
 ]
