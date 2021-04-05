@@ -1,3 +1,4 @@
+import { ThunkAction } from "redux-thunk"
 import {
   CatalogActionTypes,
   IAddBreadcrumbsItem,
@@ -7,13 +8,7 @@ import {
   ISetCatalog,
   IToggleCatalog
 } from "../../types/catalogTypes"
-import {
-  ADD_BREADCRUMBS_ITEM,
-  CLEAR_BREADCRUMBS,
-  SET_CATALOG,
-  TOGGLE_CATALOG
-} from "../../utilits/constants"
-import { ThunkAction } from "redux-thunk"
+import { ADD_BREADCRUMBS_ITEM, CLEAR_BREADCRUMBS, SET_CATALOG, TOGGLE_CATALOG } from "../../utilits/constants"
 import { StateType } from "../store"
 import catalogAPI from "../../utilits/api/catalogAPI"
 

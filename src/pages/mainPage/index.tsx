@@ -4,8 +4,9 @@ import { Typography } from "@material-ui/core"
 import ProductList from "../../components/productList"
 import { StateType } from "../../redux/store"
 import { IProduct } from "../../types/productType"
-import { useStyles } from "./styles"
 import { setLastViewedProducts } from "../../redux/actions/product"
+import AppLoad from "../../components/appLoad"
+import { useStyles } from "./styles"
 
 const data: IProduct[] = [
   {
@@ -43,6 +44,11 @@ const MainPage: FC = () => {
   }, [dispatch])
 
   const lastViewedProducts = useSelector((state: StateType) => state.productReducer.lastViewedProducts)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
+
+  if (isLoading) {
+    return <AppLoad/>
+  }
 
   return (
     <div className={classes.root}>

@@ -4,6 +4,7 @@ import {
   SET_SELECTED_PRODUCT,
   SET_TOTAL_COUNT_PRODUCTS
 } from "../utilits/constants"
+import { ISetIsLoading } from "./appTypes"
 
 export interface IProduct {
   id: number
@@ -48,3 +49,4 @@ export type ProductActionTypes = ISetProducts
   | ISetTotalCountProduct
   | ISetSelectedProduct
   | ISetLastViewedProducts
+  | ISetIsLoading

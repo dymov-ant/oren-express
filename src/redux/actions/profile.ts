@@ -6,6 +6,7 @@ import { StateType } from "../store"
 import { ILoginData, IRegisterData } from "../../types/authTypes"
 import authAPI from "../../utilits/api/authAPI"
 import profileAPI from "../../utilits/api/profileAPI"
+import { setIsLoading } from "./app"
 
 export const setUser = (user: IUser | null): ISetUser => ({
   type: SET_USER,
@@ -20,6 +21,7 @@ export const logout = () => (dispatch: Dispatch) => {
 type ProfileThunkType = ThunkAction<Promise<void>, StateType, unknown, ProfileActionsType>
 
 export const register = (registerData: IRegisterData): ProfileThunkType => async dispatch => {
+  dispatch(setIsLoading(true))
   try {
     const response = await authAPI.register(registerData)
     if (response.status === 201) {
@@ -27,12 +29,15 @@ export const register = (registerData: IRegisterData): ProfileThunkType => async
       localStorage.setItem(ACCESS_TOKEN, token)
       await dispatch(getUserData())
     }
+    dispatch(setIsLoading(false))
   } catch (e) {
     console.log(e.response)
+    dispatch(setIsLoading(false))
   }
 }
 
 export const login = (loginData: ILoginData): ProfileThunkType => async dispatch => {
+  dispatch(setIsLoading(true))
   try {
     const response = await authAPI.login(loginData)
     if (response.status === 200) {
@@ -40,12 +45,15 @@ export const login = (loginData: ILoginData): ProfileThunkType => async dispatch
       localStorage.setItem(ACCESS_TOKEN, token)
       await dispatch(getUserData())
     }
+    dispatch(setIsLoading(false))
   } catch (e) {
     console.log(e.response)
+    dispatch(setIsLoading(false))
   }
 }
 
 export const getUserData = (): ProfileThunkType => async dispatch => {
+  dispatch(setIsLoading(true))
   try {
     const response = await profileAPI.getUserData()
     if (response.status === 200) {
@@ -55,7 +63,9 @@ export const getUserData = (): ProfileThunkType => async dispatch => {
         email: response.data.email
       }))
     }
+    dispatch(setIsLoading(false))
   } catch (e) {
     console.log(e.response)
+    dispatch(setIsLoading(false))
   }
 }

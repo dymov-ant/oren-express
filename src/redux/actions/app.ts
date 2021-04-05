@@ -1,5 +1,5 @@
-import { IMessage, ISetInitialized, ISetMessage } from "../../types/appTypes"
-import { ACCESS_TOKEN, SET_INITIALIZED, SET_MESSAGE } from "../../utilits/constants"
+import { IMessage, ISetInitialized, ISetIsLoading, ISetMessage } from "../../types/appTypes"
+import { ACCESS_TOKEN, SET_INITIALIZED, SET_IS_LOADING, SET_MESSAGE } from "../../utilits/constants"
 import { getUserData } from "./profile"
 import { getCatalog } from "./catalog"
 
@@ -11,6 +11,11 @@ export const setMessage = (message: IMessage | null): ISetMessage => ({
 const setInitialized = (isInitialized: boolean): ISetInitialized => ({
   type: SET_INITIALIZED,
   isInitialized
+})
+
+export const setIsLoading = (isLoading: boolean): ISetIsLoading => ({
+  type: SET_IS_LOADING,
+  isLoading
 })
 
 export const initialization = () => async (dispatch: any) => {

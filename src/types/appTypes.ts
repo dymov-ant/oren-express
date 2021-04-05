@@ -1,4 +1,4 @@
-import { SET_INITIALIZED, SET_MESSAGE } from "../utilits/constants"
+import { SET_INITIALIZED, SET_IS_LOADING, SET_MESSAGE } from "../utilits/constants"
 
 export interface IMessage {
   type: "success" | "error"
@@ -15,4 +15,9 @@ export interface ISetInitialized {
   isInitialized: boolean
 }
 
-export type AppActionTypes = ISetMessage | ISetInitialized
+export interface ISetIsLoading {
+  type: typeof SET_IS_LOADING
+  isLoading: boolean
+}
+
+export type AppActionTypes = ISetMessage | ISetInitialized | ISetIsLoading

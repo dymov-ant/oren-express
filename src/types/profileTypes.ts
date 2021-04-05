@@ -1,4 +1,5 @@
 import { SET_USER } from "../utilits/constants"
+import { ISetIsLoading } from "./appTypes"
 
 export interface IUser {
   id?: number
@@ -12,4 +13,4 @@ export interface ISetUser {
 }
 
 
-export type ProfileActionsType = ISetUser
+export type ProfileActionsType = ISetUser | ISetIsLoading

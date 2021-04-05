@@ -6,14 +6,20 @@ import { TextField } from "formik-material-ui"
 import { IUser } from "../../types/profileTypes"
 import { StateType } from "../../redux/store"
 import { settingProfileSchema } from "../../utilits/validationSchemes"
+import AppLoad from "../../components/appLoad"
 import { useStyles } from "./styles"
 
 const SettingsPage: FC = () => {
   const classes = useStyles()
   const user = useSelector((state: StateType) => state.profileReducer.user)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
   const initialValues: IUser = {
     name: user?.name || "",
     email: user?.email || ""
+  }
+
+  if (isLoading) {
+    return <AppLoad/>
   }
 
   return (

@@ -15,6 +15,7 @@ import {
 } from "../../utilits/constants"
 import { StateType } from "../store"
 import productAPI from "../../utilits/api/productAPI"
+import { setIsLoading } from "./app"
 
 export const setProducts = (products: IProduct[]): ISetProducts => ({
   type: SET_PRODUCTS,
@@ -39,13 +40,15 @@ export const setLastViewedProducts = (products: IProduct[]): ISetLastViewedProdu
 type ProductThunkType = ThunkAction<Promise<void>, StateType, unknown, ProductActionTypes>
 
 export const getProducts = (catalogId: number): ProductThunkType => async dispatch => {
+  dispatch(setIsLoading(true))
   try {
     const response = await productAPI.getProducts(catalogId)
     if (response.status === 200) {
       dispatch(setTotalCountProducts(response.data.countProducts))
       dispatch(setProducts(response.data.data))
     }
+    dispatch(setIsLoading(false))
   } catch (e) {
-
+    dispatch(setIsLoading(false))
   }
 }

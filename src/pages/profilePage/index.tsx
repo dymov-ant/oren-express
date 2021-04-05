@@ -5,8 +5,9 @@ import { StateType } from "../../redux/store"
 import { Link } from "react-router-dom"
 import { SETTINGS_PAGE } from "../../utilits/constants"
 import ProductList from "../../components/productList"
-import { useStyles } from "./styles"
 import { IProduct } from "../../types/productType"
+import AppLoad from "../../components/appLoad"
+import { useStyles } from "./styles"
 
 const data: IProduct[] = [
   {
@@ -38,6 +39,11 @@ const data: IProduct[] = [
 const ProfilePage: FC = () => {
   const classes = useStyles()
   const user = useSelector((state: StateType) => state.profileReducer.user)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
+
+  if (isLoading) {
+    return <AppLoad/>
+  }
 
   return (
     <>

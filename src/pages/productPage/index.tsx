@@ -7,16 +7,20 @@ import { addBreadcrumbsItem, clearBreadcrumbs } from "../../redux/actions/catalo
 import { getCategoryNameById } from "../../utilits/getCategoryNameById"
 import { CATALOG_ROUTE, PRODUCT_ROUTE } from "../../utilits/constants"
 import { setSelectedProduct } from "../../redux/actions/product"
+import AppLoad from "../../components/appLoad"
 
 const ProductPage: FC = () => {
   const dispatch = useDispatch()
   const catalog = useSelector((state: StateType) => state.catalogReducer.catalog)
   const {pathname} = useLocation()
   const productId = pathname.split("/")[2]
+
   useEffect(() => {
     dispatch(setSelectedProduct(+productId))
   }, [dispatch, productId])
+
   const product = useSelector((state: StateType) => state.productReducer.selectedProduct)
+
   useEffect(() => {
     dispatch(clearBreadcrumbs())
     if (product) {
@@ -33,7 +37,13 @@ const ProductPage: FC = () => {
       }
     }
   }, [dispatch, catalog, product])
+
   const breadcrumbsMap = useSelector((state: StateType) => state.catalogReducer.breadcrumbs)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
+
+  if (isLoading) {
+    return <AppLoad/>
+  }
 
   return (
     <div>

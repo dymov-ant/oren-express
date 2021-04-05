@@ -10,12 +10,14 @@ import { loginSchema } from "../../../utilits/validationSchemes"
 import { MAIN_ROUTE, REGISTRATION_ROUTE } from "../../../utilits/constants"
 import { login } from "../../../redux/actions/profile"
 import { StateType } from "../../../redux/store"
+import AppLoad from "../../../components/appLoad"
 import { useStyles } from "../styles"
 
 const LoginPage: FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const auth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
   const initialValues: ILoginData = {
     email: "",
     password: ""
@@ -23,6 +25,10 @@ const LoginPage: FC = () => {
 
   if (auth) {
     return <Redirect to={MAIN_ROUTE}/>
+  }
+
+  if (isLoading) {
+    return <AppLoad/>
   }
 
   return (

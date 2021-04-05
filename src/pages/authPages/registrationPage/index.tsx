@@ -10,12 +10,14 @@ import { LOGIN_ROUTE, MAIN_ROUTE } from "../../../utilits/constants"
 import { IRegisterData } from "../../../types/authTypes"
 import { register } from "../../../redux/actions/profile"
 import { StateType } from "../../../redux/store"
+import AppLoad from "../../../components/appLoad"
 import { useStyles } from "../styles"
 
 const RegistrationPage: FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const auth = useSelector((state: StateType) => state.profileReducer.isAuthenticated)
+  const isLoading = useSelector((state: StateType) => state.appReducer.isLoading)
   const initialValues: IRegisterData = {
     name: "",
     email: "",
@@ -25,6 +27,10 @@ const RegistrationPage: FC = () => {
 
   if (auth) {
     return <Redirect to={MAIN_ROUTE}/>
+  }
+
+  if (isLoading) {
+    return <AppLoad/>
   }
 
   return (

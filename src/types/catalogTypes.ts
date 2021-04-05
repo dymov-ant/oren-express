@@ -3,6 +3,7 @@ import {
   SET_CATALOG,
   TOGGLE_CATALOG
 } from "../utilits/constants"
+import { ISetIsLoading } from "./appTypes"
 
 export interface IBreadcrumb {
   to: string
@@ -40,3 +41,4 @@ export type CatalogActionTypes =
   | IToggleCatalog
   | IAddBreadcrumbsItem
   | IClearBreadcrumbs
+  | ISetIsLoading
