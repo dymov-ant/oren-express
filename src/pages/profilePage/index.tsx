@@ -4,7 +4,36 @@ import { useSelector } from "react-redux"
 import { StateType } from "../../redux/store"
 import { Link } from "react-router-dom"
 import { SETTINGS_PAGE } from "../../utilits/constants"
+import ProductList from "../../components/productList"
 import { useStyles } from "./styles"
+import { IProduct } from "../../types/productType"
+
+const data: IProduct[] = [
+  {
+    id: 35,
+    name: "Валенки",
+    category_id: 1,
+    user_id: 1,
+    shop_id: 1,
+    main_photo: "https://img.mvideo.ru/Pdb/20038263b.jpg",
+    price: 1122,
+    description: "tralala",
+    created_at: "tut budet data",
+    updated_at: "i tut budet data"
+  },
+  {
+    id: 36,
+    name: "Валенки",
+    category_id: 1,
+    user_id: 1,
+    shop_id: 1,
+    main_photo: "https://img.mvideo.ru/Pdb/20038263b.jpg",
+    price: 1122,
+    description: "tralala",
+    created_at: "tut budet data",
+    updated_at: "i tut budet data"
+  }
+]
 
 const ProfilePage: FC = () => {
   const classes = useStyles()
@@ -28,7 +57,10 @@ const ProfilePage: FC = () => {
         </Grid>
       </div>
       <div className={classes.history}>
-        История покупок
+        <Typography variant="h5">
+          История покупок
+        </Typography>
+        <ProductList products={data}/>
       </div>
     </>
   )

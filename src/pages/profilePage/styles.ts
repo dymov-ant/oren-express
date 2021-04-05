@@ -1,10 +1,9 @@
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   userData: {
-    height: "30vh"
+    marginBottom: theme.spacing(3)
   },
   history: {
-    height: "30vh"
   }
 }))
